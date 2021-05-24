@@ -124,6 +124,10 @@ void CaptureCont::handleSettingsUpdate(settings::type type, const QJsonDocument&
 			setSystemCaptureEnable(false); // clear prio
 			_systemCaptPrio = obj["systemPriority"].toInt(250);
 		}
+		if(_v4lInactiveTimer->interval() != obj["v4lTimeout"].toInt(1000))
+		{
+			_v4lInactiveTimer->setInterval(obj["v4lTimeout"].toInt(1000));
+		}
 
 		setV4LCaptureEnable(obj["v4lEnable"].toBool(true));
 		setSystemCaptureEnable(obj["systemEnable"].toBool(true));
